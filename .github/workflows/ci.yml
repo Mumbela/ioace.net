@@ -7,7 +7,7 @@ on:
 
 jobs:
   scan_ruby:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, windows]
 
     steps:
       - name: Checkout code
@@ -23,7 +23,7 @@ jobs:
         run: bin/brakeman --no-pager
 
   scan_js:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, windows]
 
     steps:
       - name: Checkout code
@@ -39,7 +39,8 @@ jobs:
         run: bin/importmap audit
 
   lint:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, windows]
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -54,7 +55,7 @@ jobs:
         run: bin/rubocop -f github
 
   test:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, windows]
 
     services:
       postgres:
@@ -74,7 +75,7 @@ jobs:
 
     steps:
       - name: Install packages
-        run: sudo apt-get update && sudo apt-get install --no-install-recommends -y build-essential git libpq-dev libyaml-dev pkg-config google-chrome-stable
+        run: choco install git ruby -y
 
       - name: Checkout code
         uses: actions/checkout@v4
