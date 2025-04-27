@@ -1,4 +1,14 @@
-name: CI
+name: Ruby ioace.com for GitHub Actions
+# This workflow is for running CI tests on GitHub Actions.
+# It runs on every push to the main branch and on pull requests.
+# It includes the following jobs:
+# - make_executable: Makes the bin files executable.
+# - scan_ruby: Scans for common Rails security vulnerabilities using static analysis.
+# - scan_js: Scans for security vulnerabilities in JavaScript dependencies.
+# - lint: Lints code for consistent style.
+# - test: Runs the test suite and keeps screenshots from failed system tests.
+# The workflow uses the latest version of Ubuntu as the runner.
+# It also sets up a PostgreSQL service for the test job.
 
 on:
   pull_request:
@@ -83,10 +93,10 @@ jobs:
         image: postgres
         env:
           POSTGRES_USER: postgres
-          POSTGRES_PASSWORD: postgres
+          POSTGRES_PASSWORD: 
         ports:
           - 5432:5432
-        options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=3
+        options: --health-cmd="pg_isready" --health-interval=10s --health-timeout=5s --health-retries=5
 
       # redis:
       #   image: redis
@@ -106,6 +116,12 @@ jobs:
         with:
           ruby-version: .ruby-version
           bundler-cache: true
+      
+      - name: install-postgresql
+        uses: tj-actions/install-postgresql@v3.2.0
+        with:
+          postgresql-version: 17
+    
 
       - name: Run tests
         env:
