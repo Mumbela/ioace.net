@@ -6,6 +6,28 @@ on:
     branches: [ main ]
 
 jobs:
+  make_executable:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Make bin files executable
+        run: |
+          chmod +x bin/brakeman
+          chmod +x bin/bundle
+          chmod +x bin/dev
+          chmod +x bin/docker-entrypoint
+          chmod +x bin/importmap
+          chmod +x bin/jobs
+          chmod +x bin/kamal
+          chmod +x bin/rails
+          chmod +x bin/rake
+          chmod +x bin/rubocop
+          chmod +x bin/setup
+          chmod +x bin/thrust
+
   scan_ruby:
     runs-on: ubuntu-latest
 
