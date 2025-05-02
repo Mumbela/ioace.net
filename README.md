@@ -34,4 +34,7 @@ You can run `bin/rails test --help` on your console for more parameters using te
 
 ## Deployment instructions
 
-* ...
+### Editing Credentials
+
+* Edit credentials in config/credentials.yml.enc by running `EDITOR="code --wait" rails credentials:edit` on a linux related environment, 
+or `$env:EDITOR="code --wait"` to add the editor to your environment variables, then `rails credentials:edit` on a windows environment.
