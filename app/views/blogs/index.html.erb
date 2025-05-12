@@ -5,12 +5,19 @@
 <h1>Blogs</h1>
 
 <div id="blogs">
-  <% @blogs.each do |blog| %>
-    <%= render blog %>
-    <p>
-      <%= link_to "Show this blog", blog %>
-    </p>
-  <% end %>
+	<% @blogs.each do |blog| %>
+		<p><%= render blog %></p>
+		
+		<% if blog.created_at.strftime('%B %d, %Y') != blog.updated_at.strftime('%B %d, %Y') %>
+			<p>Posted: <%= blog.created_at.strftime('%B %d, %Y') %> Updated: <%= blog.updated_at.strftime('%B %d, %Y') %></p>
+		<% else %>
+			<p>Posted: <%= blog.created_at.strftime('%B %d, %Y') %></p>
+		<% end %>
+
+		<p>
+			<%= link_to "Read More", blog_path(blog), class: "" %>
+		</p>
+	<% end %>
 </div>
 
 <%= link_to "New blog", new_blog_path %>
