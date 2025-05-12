@@ -1,0 +1,14 @@
+<div id="<%= dom_id blog %>">
+  <p>
+    <strong>Title:</strong>
+    <%= blog.title %>
+  </p>
+
+  <p>
+    <strong>Content:</strong>
+    <%= blog.content %>
+    <!--TODO: truncate content to 150 characters. e.g. truncate(blog.content, length: 150) -->
+    <!-- truncate throws error: on ActionText::RichText -->
+  </p>
+
+</div>
